@@ -1,0 +1,24 @@
+{{- if .Values.website.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.website.fullname | quote }}
+  namespace: {{ .Values.website.namespace | quote }}
+spec:
+  replicas: {{ .Values.website.replicas | default 1 }}
+  selector:
+    matchLabels:
+      {{- toYaml .Values.website.labels | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- toYaml .Values.website.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: ecom-web
+        image: {{ .Values.website.image | default "edwardallen/ecom-web:v1" | quote }}
+        imagePullPolicy: Always
+        ports:
+          - containerPort: {{ .Values.website.port | default 80 }}
+{{- end }}
+

@@ -1,0 +1,28 @@
+website:
+  enabled: true
+  fullname: "go-app-deployment"
+  replicas: 1
+  namespace: "go"
+  labels:
+    app: "go-app"
+  image: "cloudiepad/go-app-img:v1"
+  port: 5678
+  configmap:
+    env:
+      fullname: "example-configmap"
+  secret:
+    fullname: "example-secret"
+replicaCount: 1
+
+service:
+  name: "go-app-service"
+  namespace: "go"
+  selector:
+    app: "go-app"
+  ports:
+    - protocol: "TCP"
+      port: 5678
+      targetPort: 5678
+      nodePort: 30000  # Choose any available port within the range 30000-32767
+  type: "NodePort"
+
