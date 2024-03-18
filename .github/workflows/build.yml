@@ -37,6 +37,13 @@ jobs:
         IMAGE_TAG: latest
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        # Verify if the Docker image was built successfully
+        if [ "$(docker images -q $REGISTRY/$REPOSITORY:$IMAGE_TAG)" ]; then
+        echo "Docker image built successfully"
+        else
+        echo "Failed to build Docker image"
+        exit 1
+        fi
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: Update kube config
