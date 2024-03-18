@@ -31,7 +31,7 @@ jobs:
 
     - name: Check ECR Login Status
       run: |
-         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/e0m9v9o0
+         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
          if [ $? -eq 0 ]; then
          echo "ECR login successful"
          else
