@@ -54,7 +54,7 @@ jobs:
         echo "Failed to build Docker image"
         exit 1
         fi
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker push public.ecr.aws/e0m9v9o0/devops-cohort-1:latest
 
     - name: Update kube config
       run: aws eks update-kubeconfig --name devops-cluster
