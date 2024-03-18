@@ -36,9 +36,8 @@ jobs:
         REPOSITORY: devops-cohort-1
         IMAGE_TAG: latest
       run: |
-        docker build -t devops-cohort-1:latest .
-        docker tag devops-cohort-1:latest public.ecr.aws/e0m9v9o0/devops-cohort-1:latest
-        docker push public.ecr.aws/e0m9v9o0/devops-cohort-1:latest
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: Update kube config
       run: aws eks update-kubeconfig --name devops-cluster
