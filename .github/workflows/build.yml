@@ -39,7 +39,7 @@ jobs:
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name devops-cluster
+      run: aws eks update-kubeconfig --name cluster
 
     - name: Deploy go-app helm chart to EKS
       run: |

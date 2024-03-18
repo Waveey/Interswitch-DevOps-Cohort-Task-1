@@ -5,7 +5,7 @@ website:
   namespace: "go"
   labels:
     app: "go-app"
-  image: "cloudiepad/go-app-img:v1"
+  image: "public.ecr.aws/e0m9v9o0/devops-cohort-1:latest"
   port: 5678
   configmap:
     env:
