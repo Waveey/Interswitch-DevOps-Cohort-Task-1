@@ -29,6 +29,15 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: Check ECR Login Status
+      run: |
+        if [ "${{ steps.login-ecr.outputs.status }}" == "Login Succeeded" ]; then
+          echo "ECR login successful"
+        else
+          echo "ECR login failed"
+          exit 1
+        fi  
+
     - name: Build, tag, and push docker image to Amazon ECR
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
