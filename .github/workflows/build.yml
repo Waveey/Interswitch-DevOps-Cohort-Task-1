@@ -19,7 +19,7 @@ jobs:
       id: install
 
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -33,12 +33,12 @@ jobs:
 
     - name: Build, tag, and push docker image to Amazon ECR Public
       env:
-        REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        REGISTRY: public.ecr.aws/e0m9v9o0
         REPOSITORY: devops-cohort-1
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
-        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker build -t public.ecr.aws/e0m9v9o0/devops-cohort-1:latest .
+        docker push public.ecr.aws/e0m9v9o0/devops-cohort-1:latest
     
 
     - name: Update kube config
