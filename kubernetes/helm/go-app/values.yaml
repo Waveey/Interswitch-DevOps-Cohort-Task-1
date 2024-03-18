@@ -7,12 +7,7 @@ website:
     app: "go-app"
   image: "public.ecr.aws/e0m9v9o0/devops-cohort-1:latest"
   port: 5678
-  configmap:
-    env:
-      fullname: "example-configmap"
-  secret:
-    fullname: "example-secret"
-replicaCount: 1
+  
 
 service:
   name: "go-app-service"
